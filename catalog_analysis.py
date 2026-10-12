@@ -23,6 +23,8 @@ movies = [
      "rating": 7.3, "duration_min": 129, "actors": ["P. Diaz", "T. Chalamet"]},
 ]
 
+# Этап 1
+
 def average_rating(movies):
     total_rating = 0
     for i in movies:
@@ -41,6 +43,8 @@ def duration_in_hours(minutes):
     str_minutes = minutes % 60
     return f"{str_hours} ч {str_minutes}"
 
+# Этап 2
+
 def rating_tier(rating):
     if rating >= 9:
         return "шедевр"
@@ -57,6 +61,8 @@ def decade_label(year):
             return "недавние"
         case _:
             return "старые"
+
+# Этап 3
 
 def movie_name(movies):
     for i in movies:
@@ -82,6 +88,8 @@ def count_long_movies(movies, threshold=120):
             counter += 1
     return counter
 
+# Этап 4
+
 def normalize_title(title):
     words = title.split()
     result = []
@@ -101,6 +109,23 @@ def format_report_line(movie):
     duration = duration_in_hours(movie["duration_min"])
     genres = ", ".join(sorted(movie["genres"]))
     return f'"{title}" ({year}) - {rating}/10, {duration}, жанры: {genres}'
+
+# Этап 5
+
+def titles_sorted_by_rating(movies):
+    sorted_movies = sorted(movies, key=lambda movie: movie["rating"], reverse=True)
+    titles = []
+    for movie in sorted_movies:
+        titles.append(movie["title"])
+    return titles
+
+def top_n_by_rating(movies, n=3):
+    sorted_movies = sorted(movies, key=lambda movie: movie["rating"], reverse=True)
+    tops = sorted_movies[:n]
+    result = []
+    for movie in tops:
+        result.append((movie["title"], movie["rating"]))
+    return result
     
     
 def main():
