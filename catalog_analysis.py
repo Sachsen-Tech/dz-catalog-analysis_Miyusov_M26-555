@@ -153,6 +153,24 @@ def above_average_list(movies):
 def main():
     print("Hello from dz-catalog-analysis-miyusov-m26-555!")
 
+# Этап 7
+
+def all_genres(movies):
+    unique_genres = set()
+    for movie in movies:
+        unique_genres.update(movie["genre"])
+    return unique_genres
+
+def common_actors(movie1, movie2):
+    actors1 = set(movie1["actors"])
+    actors2 = set(movie2["actors"])
+    return actors1 & actors2
+
+def genres_only_in_one(movies_a, movies_b):
+    genres_a = all_genres(movies_a)
+    genres_b = all_genres(movies_b)
+    return genres_a - genres_b
+
 
 if __name__ == "__main__":
     main()
