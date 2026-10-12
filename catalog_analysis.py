@@ -127,7 +127,29 @@ def top_n_by_rating(movies, n=3):
         result.append((movie["title"], movie["rating"]))
     return result
     
-    
+# Этап 6
+
+def count_by_genre(movies):
+    genre_count = {}
+    for movie in movies:
+        for genre in movie["genres"]:
+            genre_count[genre] = genre_count.get(genre, 0) + 1
+    return genre_count
+
+def actor_filmography(movies):
+    actor_movies = {}
+    for movie in movies:
+        for actor in movie["actors"]:
+            if actor not in actor_movies:
+                actor_movies[actor] = []
+        actor_movies[actor].append(movie["title"])
+    return actor_movies
+
+def above_average_list(movies):
+    average = average_rating(movies)
+    above_average_movies = {movie["title"]: movie["rating"] for movie in movies if movie["rating"] > average}
+    return above_average_movies
+
 def main():
     print("Hello from dz-catalog-analysis-miyusov-m26-555!")
 
