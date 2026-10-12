@@ -228,7 +228,7 @@ def actor_filmography(movies):
         for actor in movie["actors"]:
             if actor not in actor_movies:
                 actor_movies[actor] = []
-        actor_movies[actor].append(movie["title"])
+            actor_movies[actor].append(movie["title"])
     return actor_movies
 
 
