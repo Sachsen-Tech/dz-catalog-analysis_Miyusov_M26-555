@@ -69,7 +69,7 @@ def first_masterpiece(movies):
     i = 0
     while i < len(movies):
         if movies[i]["rating"] > 9:
-            print(f"Шедевр найден. Это {movies[i]["title"]} с рейтингом {movies[i]["rating"]}")
+            print(f'Шедевр найден. Это {movies[i]["title"]} с рейтингом {movies[i]["rating"]}')
             break
         i += 1
     else:
@@ -82,6 +82,26 @@ def count_long_movies(movies, threshold=120):
             counter += 1
     return counter
 
+def normalize_title(title):
+    words = title.split()
+    result = []
+    for word in words:
+        normalized_word = word[0].upper() + word[1:]
+        result.append(normalized_word)
+    return " ".join(result)
+
+def make_slug(title):
+    slugged = normalize_title(title)
+    return slugged.lower().replace(" ", "-")
+
+def format_report_line(movie):
+    title = normalize_title(movie)
+    year = movie["year"]
+    rating = movie["rating"]
+    duration = duration_in_hours(movie["duration_min"])
+    genres = ", ".join(sorted(movie["genres"]))
+    return f'"{title}" ({year}) - {rating}/10, {duration}, жанры: {genres}'
+    
     
 def main():
     print("Hello from dz-catalog-analysis-miyusov-m26-555!")
