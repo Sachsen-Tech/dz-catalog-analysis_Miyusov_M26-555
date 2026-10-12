@@ -103,7 +103,7 @@ def make_slug(title):
     return slugged.lower().replace(" ", "-")
 
 def format_report_line(movie):
-    title = normalize_title(movie)
+    title = normalize_title(movie["title"])
     year = movie["year"]
     rating = movie["rating"]
     duration = duration_in_hours(movie["duration_min"])
@@ -150,9 +150,6 @@ def above_average_list(movies):
     above_average_movies = {movie["title"]: movie["rating"] for movie in movies if movie["rating"] > average}
     return above_average_movies
 
-def main():
-    print("Hello from dz-catalog-analysis-miyusov-m26-555!")
-
 # Этап 7
 
 def all_genres(movies):
@@ -171,6 +168,20 @@ def genres_only_in_one(movies_a, movies_b):
     genres_b = all_genres(movies_b)
     return genres_a - genres_b
 
+# Этап 8
+
+def iter_high_rated(movies, min_rating=8.0):
+    for movie in movies:
+        if movie["rating"] >= min_rating:
+            yield movie
+
+def main():
+    for movie in iter_high_rated(movies):
+        print(format_report_line(movie))
+
+    total_duration = sum(movie["duration_min"] for movie in movies if movie["rating"] > 7)
+
+    print("Общая продолжительность: ", total_duration)
 
 if __name__ == "__main__":
     main()
